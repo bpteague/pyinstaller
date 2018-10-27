@@ -19,7 +19,7 @@ hiddenimports, binaries, datas = add_qt5_dependencies(__file__)
 
 # Include the web engine process, translations, and resources.
 rel_data_path = ['PyQt5', 'Qt']
-if compat.is_darwin:
+if compat.is_darwin and not compat.is_conda:
     # This is based on the layout of the Mac wheel from PyPi.
     data_path = pyqt5_library_info.location['DataPath']
     libraries = ['QtCore', 'QtWebEngineCore', 'QtQuick', 'QtQml', 'QtNetwork',
