@@ -486,8 +486,13 @@ def add_qt5_dependencies(hook_file):
         if lib_name.startswith('lib'):
             lib_name = lib_name[3:]
         # Mac: rename from ``qt`` to ``qt5`` to match names in Windows/Linux.
-        if is_darwin and lib_name.startswith('qt'):
+        if is_darwin and lib_name.startswith('qt') and not lib_name.startswith('qt5'):
             lib_name = 'qt5' + lib_name[2:]
+        elif is_darwin and lib_name.startswith('qt5'):
+            lib_name = 'qt5' + lib_name[3:]
+        if is_darwin and len(os.path.splitext(lib_name)) > 1:
+            lib_name = os.path.splitext(lib_name)[0]
+
         logger.debug('add_qt5_dependencies: raw lib %s -> parsed lib %s',
                      imp, lib_name)
 
